@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
+.Blog_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #161b22;
+  padding: 30px;
+  padding-bottom: 15px;
+  color: #888181;
+}
+
+.Blog_header p {
+  color: white;
+  font-family: DM Sans;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 31.25px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.Blog_header a {
+  text-decoration: none;
+  color: white;
+  background-color: #161b22;
+  padding: 10px;
+  border-radius: 7px;
+}
+
+.search input {
+  background-color: transparent;
+  padding:7px;
+  color:#888181;
+  outline: none;
+  font-family: DM Sans;
+  font-size: 16px;
+  border: 1px solid #888181;
+  font-weight: 500;
+  border-radius: 7px;
+}
+
+.search select {
+  background-color: transparent;
+  color:#888181;
+  padding: 8px;
+  padding-right: 23px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #888181;
+  font-family: DM Sans;
+font-size: 16px;
+font-weight: 500;
+
+}
+
+.search select[type="text"],
+.search input[type="text"] {
+  outline: none;
+}
+
+.search option{
+  color:#888181;
+  background-color: #01001C;
+  border: 1px solid #01001C;
+  font-family: DM Sans;
+  font-size: 16px;
+  border: 1px solid #888181;
+  font-weight: 500;
+}
+.Blog_Entries {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  border-bottom: 1px solid #161b22;
+}
+
+.Blog_Entries .InputField {
+  width: 40px;
+  height: 30px;
+  background-color: transparent;
+  outline: none;
+  border: 1px solid #161b22;
+  border-radius: 5px;
+}
+
+.InputField {
+  padding: 2px;
+  margin: 0px 10px;
+  font-size: 16px;
+  text-align: center;
+  /* Border color */
+  border-radius: 5px; /* Rounded corners */
+  outline: none;
+  color: #888181;
+  /* Text color */
+  background-color: transparent; /* Background color */
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s; /* Smooth transitions */
+}
+
+.InputField:hover {
+  background-color: transparent;
+}
+
+.Blog_Entries span {
+  display: inline-block;
+  color: #888181;
+  font-family: DM Sans;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.search{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:20px;
+}
