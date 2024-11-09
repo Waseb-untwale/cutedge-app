@@ -5,6 +5,7 @@
 }
 
 .App_Container{
+  height: 100vh;
   background-color: #01001C;
 }
 
