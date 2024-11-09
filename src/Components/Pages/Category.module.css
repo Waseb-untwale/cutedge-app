@@ -31,8 +31,8 @@
 
 .search input {
   background-color: transparent;
-  padding:7px;
-  color:#888181;
+  padding: 7px;
+  color: #888181;
   outline: none;
   font-family: DM Sans;
   font-size: 16px;
@@ -43,16 +43,15 @@
 
 .search select {
   background-color: transparent;
-  color:#888181;
+  color: #888181;
   padding: 8px;
   padding-right: 23px;
   border-radius: 5px;
   outline: none;
   border: 1px solid #888181;
   font-family: DM Sans;
-font-size: 16px;
-font-weight: 500;
-
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .search select[type="text"],
@@ -60,10 +59,10 @@ font-weight: 500;
   outline: none;
 }
 
-.search option{
-  color:#888181;
-  background-color: #01001C;
-  border: 1px solid #01001C;
+.search option {
+  color: #888181;
+  background-color: #01001c;
+  border: 1px solid #01001c;
   font-family: DM Sans;
   font-size: 16px;
   border: 1px solid #888181;
@@ -113,9 +112,107 @@ font-weight: 500;
   font-weight: 500;
 }
 
-.search{
+.search {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap:20px;
+  gap: 20px;
 }
+
+
+.Table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+  margin-top:20px;
+  color:white
+}
+table {
+  width: 100%;
+  table-layout: fixed; /* Ensures the columns stay a fixed width */
+}
+
+
+th,td{
+  word-wrap: break-word; /* Wraps long words so they don't overflow */
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+}
+
+td {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+th,
+tr,
+td {
+  color:white;
+  padding: 15px;
+  margin: 20px;
+  margin-bottom: 30px;
+} 
+
+img {
+  max-width: 100%; /* Make sure image fits in its cell */
+  max-height: 50px;
+  object-fit: contain;
+}
+
+
+tbody tr{
+  border-bottom: 1px solid #161b22;
+  padding: 20px;
+}
+
+th:nth-child(1), td:nth-child(1) { width: 50px; } /* S.No column */
+th:nth-child(2), td:nth-child(2) { width: 250px; } /* Title column */
+th:nth-child(3), td:nth-child(3) { width: 150px; } /* Category column */
+th:nth-child(4), td:nth-child(4) { width: 100px; } /* Image column */
+th:nth-child(5), td:nth-child(5) { width: 120px; } /* Date column */
+th:nth-child(6), td:nth-child(6) { width: 80px; }  /* Pin column */
+th:nth-child(7), td:nth-child(7) { width: 120px; } /* Action column */
+
+
+td i{
+  display: inline-block;
+  background-color: white;
+  color:black;
+  margin: auto;
+  margin:5px;
+  padding:1px 15px;
+  padding-bottom:3px ;
+  border-radius: 5px;
+}
+
+
+
+
+td i:nth-child(1){
+  color: #0E4D92;
+
+}
+
+td i:nth-child(2){
+  color: #DC3545;
+}
+
+/* Category.module.css */
+
+.Pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.Pagination button {
+  background-color:transparent;
+  color: white;
+  padding: 8px 12px;
+  margin: 0 5px;
+}
+
+
+
