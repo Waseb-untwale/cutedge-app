@@ -1,47 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
-import './index.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
+import './index.css'
+import Category from './Components/Pages/Category';
 import Blog from './Components/Pages/Blog';
+import Profile from './Components/Pages/Profile';
 import Login from './Components/Login';
 import AddCategory from './Components/Pages/AddCategory';
-import Profile from './Components/Pages/Profile';
-import Category from './Components/Pages/Category';
 
-const AppWrapper = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // Dummy login function
-  const handleLogin = () => {
-    setIsAuthenticated(true);
-  };
-
-  const router = createBrowserRouter(
-    [
-      {
-        path: "/",
-        element: isAuthenticated ? <Navigate to="/Blog" /> : <Navigate to="/login" />,
-        children: [
-          { path: "Category", element: <AddCategory /> },
-          { path: "Profile", element: <Profile /> },
-          { path: "Blog", element: <Blog /> },
-          { path: "blo", element: <Blog /> }
-        ]
-      },
-      {
-        path: "/login",
-        element: <Login onLogin={handleLogin} />,
-      }
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {Path:"/",element:<Category/>},
+      { path: "Category", element: <AddCategory/>  },
+      { path: "Profile", element: <Profile /> },
+      { path: "Blog", element: <Category /> },
+      { path: "blo", element:  <Blog /> }
     ]
-  );
-
-  return <RouterProvider router={router} />;
-};
+  }
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AppWrapper />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
