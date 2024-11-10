@@ -1,0 +1,66 @@
+
+.category-form .form_container
+{
+  display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin: 20px;
+}
+
+
+.category-form .form_container .Save_control{
+ background: #272727;
+ margin-top: 30px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.category-form .form_container input{
+  padding: 5px;
+}
+
+
+/* category */
+.Table{
+  margin-top: 60px;
+  border-top:1px solid #161b22;
+  border-bottom:1px solid #161b22
+}
+
+ .Table tbody tr {
+  border-bottom:none ;
+}
+
+tbody span{
+ background: #DCFCE7;
+  color:#667085;
+  padding: 8px;
+  border-radius: 8px;
+  font-family: Nunito;
+font-size: 14px;
+font-weight: 500;
+line-height: 20px;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+
+}
+
+
+td i:nth-child(1){
+  color: #0E4D92;
+  background: #B0D6FF;
+  border-radius: 9px;
+
+}
+
+td i:nth-child(2){
+  color: #DC3545;
+  background: #FDE4E9;
+  border-radius: 9px;
+}

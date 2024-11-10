@@ -9,7 +9,7 @@ import Profile from './Pages/Profile'
 import { Outlet } from 'react-router-dom'
 const Home = () => {
   return (
-    <>
+    <div>
      <header>
       <div className="p-4 img_logo">
         <img  src={LogoImage} alt="Logo-img"/>
@@ -20,11 +20,9 @@ const Home = () => {
      <div className='outlet'>
      <Outlet />
      </div>
-     
       </div>
-      <Footer/>
-     
-    </>
+      <Footer />
+    </div>
   )
 }
 

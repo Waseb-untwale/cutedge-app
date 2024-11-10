@@ -1,0 +1,122 @@
+.Profile_header p{
+  width: 100%;
+  font-family: DM Sans;
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  padding: 20px;
+  border-bottom: 1px solid #161b22;
+}
+
+.form_container {
+  margin: 12px;
+}
+
+.form .form_container .form_control input{
+  padding:8px;
+}
+.updateProfile-btn{
+   background: #0B0A35;
+   margin:10px;
+  padding:7px;
+  color:white;
+  border-radius: 7px;
+}
+
+.updatePassword-btn p{
+  margin:8px;
+  padding:7px;
+  color:white;
+  border-radius: 7px;
+  border: 1px solid #ccc;
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  
+}
+
+
+
+/* Modal content */
+.modal-content {
+  background: #01001C;
+  border: 1px solid #30363D;
+  box-shadow: 0px 4px 24px 0px #00000040;
+  border-radius: 8px;
+  width: 375px;
+ max-width: 90%;
+  position: relative; 
+}
+
+.model-heading{
+  padding: 15px;
+  border-bottom: 1px solid  #30363D;
+  ;
+}
+/* Close button (icon) */
+.close-modal-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+}
+
+/* Change color on hover */
+.close-modal-btn:hover {
+  color: #f44336;
+}
+
+
+.modal-content .form_control{
+  margin-bottom: 15px;
+}
+
+.modal-content .form_control input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #30363D
+}
+
+.modal-content .form_control label{
+  font-family: DM Sans;
+font-size: 14px;
+font-weight: 600;
+line-height: 18.23px;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+
+}
+/* button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+} */
+
+.text-center {
+  text-align: center;
+}

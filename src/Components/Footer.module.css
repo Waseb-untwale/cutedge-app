@@ -10,8 +10,5 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
-  text-align: left;
-  text-underline-position: from-font;
-  text-decoration-skip-ink: none;
-
+  bottom:0px;
 }

@@ -63,9 +63,8 @@ const Category = () => {
     <>
       <div className={`${Styles.Blog_header}`}>
         <p>All Blog</p>
-        <Link to='/Blog'>+ Add Blog</Link>
+        <Link to='/blo'>+ Add Blog</Link>
       </div>
-
       <div className={Styles.Blog_Entries}>
         <span>
           Show 
