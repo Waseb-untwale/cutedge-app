@@ -52,6 +52,7 @@ text-align: left;
 }
 
 .sideContainer .logOut{
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,4 +60,7 @@ text-align: left;
   text-decoration: none;
   color:white;
   font-weight: 600;
+  position: fixed;
+  bottom:70px;
+  left:100px;
 }

@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 .category-form .form_container
 {
   display: grid;
@@ -36,18 +36,18 @@
   border-bottom:none ;
 }
 
-tbody span{
+tbody .categoryStatus{
  background: #DCFCE7;
   color:#667085;
-  padding: 8px;
-  border-radius: 8px;
-  font-family: Nunito;
-font-size: 14px;
-font-weight: 500;
-line-height: 20px;
-text-align: left;
-text-underline-position: from-font;
-text-decoration-skip-ink: none;
+  padding: 7px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Nunito", sans-serif;
+  line-height: 20px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
 
 }
 
@@ -63,4 +63,9 @@ td i:nth-child(2){
   color: #DC3545;
   background: #FDE4E9;
   border-radius: 9px;
+}
+
+
+.error-message{
+  color:red;
 }

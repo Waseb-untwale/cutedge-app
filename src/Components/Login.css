@@ -1,0 +1,71 @@
+
+
+.Login-container{
+  border: 1px solid #161b22;
+  width:25%;
+  border-radius: 10px;
+  padding:10px;
+}
+.img_logo{
+  border-bottom: 1px solid #161b22;
+}
+.Login-container .form_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
+}
+.form_container .form_control input{
+  padding:5px;
+  width:100%;
+}
+
+.form_container .form_control input:active{
+  background-color: transparent;
+
+}
+.form_container .form_control label{
+  font-size: 17px;
+}
+
+.Profile-login{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+a{
+  text-decoration: none;
+  color:white;
+}
+
+.Login{
+  color:white;
+  margin:10px ;
+padding:6px;
+  background-color: #0B0A35;
+  border-radius: 8px;
+}
+
+.welcome-back{
+font-family: DM Sans;
+font-size: 30px;
+color:white;
+font-weight: 500;
+line-height: 28.64px;
+text-align: center;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+
+}
+
+
+.Toastify__toast--success {
+  animation: fadeOut 2s ease-in ;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% {opacity: 0; }
+}

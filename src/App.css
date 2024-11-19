@@ -12,6 +12,12 @@
   display: flex;
 }
 
+
+button{
+  background-color: transparent;
+  border: none;
+  color:white;
+}
 .outlet {
   width: 100%;
 }
@@ -20,7 +26,7 @@
   padding: 10px 30px;
   max-width: 1200px;
 }
-
+  
 .form_container {
   margin-top: 10px;
   display: grid;
@@ -33,6 +39,58 @@
   gap: 10px;
 }
 
+.form_contro{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form_contro .select-Category{
+  display: flex;
+  color:white;
+  gap:10px;
+  flex-direction: column;
+}
+
+.form_contro .select-Category input{
+  background-color: transparent;
+  outline: none;
+  color: white;
+  border: 1px solid #161b22;
+  border-radius: 10px;
+  padding: 3px;
+}
+
+.form_contro .Add_Category{
+  display: flex;
+  align-items: center;
+  color: white;
+  gap:10px;
+
+}
+
+.form_container .form_control select{
+  outline: none;
+  border: 1px solid #161b22;
+  border-radius: 10px;
+  padding:5px;
+  background-color: transparent;
+  color:#888181
+}
+ option{
+  color: #888181;
+  background-color: #01001c;
+  border: 1px solid #01001c;
+  font-family: DM Sans;
+  font-size: 16px;
+  border: 1px solid #888181;
+  font-weight: 500;
+  
+}
+
+.error{
+  color:red;
+}
 .form_control input {
   background-color: transparent;
   outline: none;
@@ -46,6 +104,12 @@
   color: white;
 }
 
+
+.button-submit button{
+  background-color: transparent;
+  color:white;
+  border: none;
+}
 .AddBlog_header {
   width: 100%;
   font-family: DM Sans;
@@ -124,4 +188,10 @@ input[type="text"] {
   font-size: 18px;
   font-weight: 400;
   color: white;
+}
+
+
+.quill > .ql-container > .ql-editor.ql-blank::before{
+  font-weight: 500;
+  color:white;
 }

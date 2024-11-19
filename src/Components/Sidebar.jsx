@@ -1,17 +1,51 @@
-import React, { useState } from "react";
-import ProfileImg from "../Images/Profile-img.png";
+import React, { useState, useEffect } from "react";
+import ProfileImg from "../Images/Profile-img.png"; 
 import styles from "./Sidebar.module.css";
 import { CiGrid41 } from "react-icons/ci";
 import { LuNewspaper } from "react-icons/lu";
+import { useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { BiLogOut } from "react-icons/bi";
 import { Link } from "react-router-dom";
-const Sidebar = () => {
-  const [activeColor, setActiveColor] = useState(""); 
+import axios from "axios"; // Add axios to handle API requests
 
-  const handleClick = (color) => {
+const Sidebar = () => {
+  const [activeColor, setActiveColor] = useState('Blog');
+  const [userName, setUserName] = useState('Rohit Sharma'); 
+  const [userProfileImg, setUserProfileImg] = useState(ProfileImg); 
+  const navigate = useNavigate();
+  const fetchUserProfile = async () => {
+    try {
+      const token = localStorage.getItem("accesstoken"); 
+      const response = await axios.get("http://localhost:5000/user/getProfile", {
+        headers: {
+          Authorization: `Bearer ${token}`, 
+        },
+      });
+
+     
+      const { name, profileImage } = response.data.user;
+      setUserName(name); // Update the profile name
+      setUserProfileImg(profileImage || ProfileImg); 
+    } catch (error) {
+      console.error("Error fetching user profile", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserProfile(); 
+  }, []);
+
+  const handleClick = async (color) => {
     setActiveColor(color); // Set the active color when a menu item is clicked
   };
+
+
+  const logoutUser = async()=>{
+    await axios.get("http://localhost:5000/user/logout")
+    localStorage.clear();
+    navigate('/')
+  }
 
   return (
     <div className={`d-flex flex-column flex-shrink-0 text-white ${styles.sideContainer}`}>
@@ -20,12 +54,12 @@ const Sidebar = () => {
         className={`${styles.profile} d-flex align-items-center text-center p-3 mt-3 justify-content-center text-right mb-md-0 me-md-auto text-decoration-none`}
       >
         <img
-          src={ProfileImg}
+          src={userProfileImg}
           alt="Profile"
           className="rounded-circle"
           style={{ width: "60px", height: "60px" }} // Increase the size of the profile image
         />
-        <span className="ps-3">Rohit Sharma</span>
+        <span className="ps-3">{userName}</span> {/* Show the fetched user name */}
       </div>
 
       {/* Admin Section */}
@@ -85,9 +119,9 @@ const Sidebar = () => {
         </li>
       </ul>
 
-      <div className={`mt-3 ${styles.Empty}`}></div>
-      <a className={`mt-3 ${styles.logOut}`}>
-        <BiLogOut size={28} style={{ opacity: 0.8 }} />
+      {/* <div className={`mt-3 ${styles.Empty}`}></div> */}
+      <a className={`mt-3 ${styles.logOut}`} onClick={logoutUser}>
+        <BiLogOut size={28} style={{ color: activeColor === "LogOut" ? "#CA4C27" : "inherit", opacity: 0.8 }} />
         LogOut
       </a>
     </div>

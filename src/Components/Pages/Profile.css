@@ -120,3 +120,13 @@ button:hover {
 .text-center {
   text-align: center;
 }
+
+
+.Toastify__toast--success {
+  animation: fadeOut 2s ease-in 1s;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity:0; }
+}

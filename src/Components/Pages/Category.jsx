@@ -1,62 +1,100 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Styles from './Category.module.css';
-import { Link } from 'react-router-dom';
-import EntryImg from '../../Images/Entries_image.png';
+import { Link, useNavigate } from 'react-router-dom'; // Add useNavigate for routing
 import { TiPin } from "react-icons/ti";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import axios from 'axios'; // Import axios for API requests
 
 const Category = () => {
   const [entriesPerPage, setEntriesPerPage] = useState(2); // Items per page
   const [currentPage, setCurrentPage] = useState(1); // Current page
   const [searchTerm, setSearchTerm] = useState(''); // State for search input
+  const [blogEntries, setBlogEntries] = useState([]); 
+  const [categories, setCategories] = useState([]); // Categories state
+  const [selectedCategory, setSelectedCategory] = useState(''); // Selected category
+  const navigate = useNavigate(); // For redirecting
 
-  // Sample data for blog entries
-  const blogEntries = [
-    { id: 1, title: "State-wise distribution...", category: "Shooting", date: "27-09-2024", image: EntryImg },
-    { id: 2, title: "The Future of Technology", category: "Technology", date: "15-08-2024", image: EntryImg },
-    { id: 3, title: "Business Strategies", category: "Business", date: "10-07-2024", image: EntryImg },
-    { id: 4, title: "Health and Wellness", category: "Health", date: "05-06-2024", image: EntryImg },
-    { id: 5, title: "Education Reforms", category: "Education", date: "01-05-2024", image: EntryImg },
-    { id: 6, title: "New Tech Trends", category: "Technology", date: "02-04-2024", image: EntryImg },
-    { id: 7, title: "Business Growth", category: "Business", date: "20-03-2024", image: EntryImg },
-    { id: 8, title: "Mindfulness Practices", category: "Health", date: "14-02-2024", image: EntryImg },
-    { id: 9, title: "Higher Education Advances", category: "Education", date: "30-01-2024", image: EntryImg },
-    { id: 10, title: "AI in Healthcare", category: "Technology", date: "15-01-2024", image: EntryImg },
-    { id: 11, title: "State-wise distribution...", category: "Shooting", date: "27-09-2024", image: EntryImg },
-    { id: 12, title: "The Future of Technology", category: "Technology", date: "15-08-2024", image: EntryImg },
-    { id: 13, title: "Business Strategies", category: "Business", date: "10-07-2024", image: EntryImg },
-    { id: 14, title: "Health and Wellness", category: "Health", date: "05-06-2024", image: EntryImg },
-    { id: 15, title: "Education Reforms", category: "Education", date: "01-05-2024", image: EntryImg },
-    { id: 16, title: "New Tech Trends", category: "Technology", date: "02-04-2024", image: EntryImg },
-    { id: 17, title: "Business Growth", category: "Business", date: "20-03-2024", image: EntryImg },
-    { id: 18, title: "Mindfulness Practices", category: "Health", date: "14-02-2024", image: EntryImg },
-    { id: 19, title: "Higher Education Advances", category: "Education", date: "30-01-2024", image: EntryImg },
-    { id: 20, title: "AI in Healthcare", category: "Technology", date: "15-01-2024", image: EntryImg },
-  ];
+  // Fetch categories
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/categories');
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+    fetchCategories();
+  }, []);
 
+  // Fetch blogs based on selected category
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        let url = 'http://localhost:5000/api/blogs';
+        if (selectedCategory) {
+          url += `?category=${selectedCategory}`; 
+        }
+        const response = await axios.get(url);
+        
+        // Fix the image path if necessary
+        const updatedBlogs = response.data.map(blog => {
+          blog.image = `http://localhost:5000${blog.image}`; 
+          return blog;
+        });
+
+        setBlogEntries(updatedBlogs);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    };
+
+    fetchBlogs();
+  }, [selectedCategory]);
+
+  // Handle entries per page change
   const handleEntriesPerPageChange = (e) => {
     setEntriesPerPage(Math.max(1, Math.min(4, Number(e.target.value))));
-    setCurrentPage(1); // Reset to the first page on change
+    setCurrentPage(1);
   };
 
+  // Handle search input change
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
-    setCurrentPage(1); // Reset to the first page on search
+    setCurrentPage(1);
   };
 
-  // Filter entries by search term
   const filteredEntries = blogEntries.filter((entry) =>
     entry.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Pagination logic
   const totalPages = Math.ceil(filteredEntries.length / entriesPerPage);
   const startIndex = (currentPage - 1) * entriesPerPage;
   const paginatedEntries = filteredEntries.slice(startIndex, startIndex + entriesPerPage);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  // Handle Blog Deletion
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this blog post?');
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:5000/api/deleteBlog/${id}`);
+        // Remove deleted blog from the list without re-fetching
+        setBlogEntries(blogEntries.filter(blog => blog._id !== id));
+        alert('Blog post deleted successfully!');
+      } catch (error) {
+        console.error('Error deleting blog post:', error);
+      }
+    }
+  };
+
+  // Handle Edit
+  const handleEdit = (id) => {
+    navigate(`/blo/${id}`);  // Navigate to the edit blog page (make sure the route is set up)
   };
 
   return (
@@ -79,12 +117,17 @@ const Category = () => {
           entries
         </span>
         <div className={Styles.search}>
-          <select className={`${Styles.SelectInput}`}>
+          <select 
+            className={`${Styles.SelectInput}`} 
+            value={selectedCategory} 
+            onChange={(e) => setSelectedCategory(e.target.value)} // Update selected category
+          >
             <option value="">Select a Category</option>
-            <option value="technology">Technology</option>
-            <option value="business">Business</option>
-            <option value="health">Health</option>
-            <option value="education">Education</option>
+            {categories.map(category => (
+              <option key={category._id} value={category.name}>
+                {category.name}
+              </option>
+            ))}
           </select>
           <input 
             type="text" 
@@ -111,16 +154,22 @@ const Category = () => {
           </thead>
           <tbody>
             {paginatedEntries.map((entry, index) => (
-              <tr key={entry.id}>
+              <tr key={entry._id}>
                 <td>{startIndex + index + 1}</td>
                 <td>{entry.title}</td>
                 <td>{entry.category}</td>
-                <td><img src={entry.image} alt="Blog Entry" /></td>
-                <td>{entry.date}</td>
+                <td>
+                  <img 
+                    src={entry.image} 
+                    alt="Blog Entry" 
+                    className={Styles.Image} 
+                  />
+                </td>
+                <td>{new Date(entry.date).toLocaleDateString()}</td>
                 <td><TiPin size={28} /></td>
                 <td>
-                  <i><FaEdit /></i>
-                  <i><MdDelete /></i>
+                  <i onClick={() => handleEdit(entry._id)}><FaEdit /></i>
+                  <i onClick={() => handleDelete(entry._id)}><MdDelete /></i>
                 </td>
               </tr>
             ))}
