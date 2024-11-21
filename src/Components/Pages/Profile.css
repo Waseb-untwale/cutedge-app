@@ -122,11 +122,12 @@ button:hover {
 }
 
 
-.Toastify__toast--success {
+/* .Toastify__toast--success {
   animation: fadeOut 2s ease-in 1s;
 }
 
 @keyframes fadeOut {
   0% { opacity: 1; }
   100% { opacity:0; }
-}
+} */
+

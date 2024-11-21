@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Profile.css";
-import { toast, ToastContainer } from "react-toastify"; // Using react-toastify for notifications
+import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
 
 const Profile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const profileToastFlag = useRef(false); // Tracks if profile update toast is shown
+  const passwordToastFlag = useRef(false); // Tracks if password update toast is shown
 
   // Fetch profile data when the component is mounted
   useEffect(() => {
@@ -21,22 +23,21 @@ const Profile = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("accesstoken")}`, 
+            Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
           },
         });
 
         const data = await response.json();
-        
-        console.log(data.user.name)
+
         if (response.ok) {
-          setName(data.user.name); 
-          setEmail(data.user.email); 
+          setName(data.user.name);
+          setEmail(data.user.email);
         } else {
-          toast.error(data.msg || "Failed to fetch profile", { toastId: "profile-fetch-failed" });
+          toast.error(data.msg || "Failed to fetch profile");
         }
       } catch (error) {
         console.error("Error fetching profile:", error);
-        toast.error("An error occurred. Please try again.", { toastId: "profile-fetch-error" });
+        toast.error("An error occurred. Please try again.");
       }
     };
 
@@ -47,13 +48,17 @@ const Profile = () => {
   const closeModal = () => setIsModalOpen(false);
 
   const handlePasswordUpdate = async () => {
+    if (passwordToastFlag.current) return; // Prevent toast from firing multiple times
+
     if (!oldPassword || !newPassword || !confirmPassword) {
-      toast.error("All fields are required!", { toastId: "fields-required" });
+      toast.error("All fields are required!");
+      passwordToastFlag.current = true; // Prevent further toasts
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      toast.error("New passwords do not match!", { toastId: "password-mismatch" });
+      toast.error("New passwords do not match!");
+      passwordToastFlag.current = true; // Prevent further toasts
       return;
     }
 
@@ -62,32 +67,33 @@ const Profile = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("accesstoken")}`, 
+          Authorization: `Bearer ${localStorage.getItem("accesstoken")}`,
         },
-        body: JSON.stringify({
-          oldPassword,
-          newPassword,
-          confirmPassword,
-        }),
+        body: JSON.stringify({ oldPassword, newPassword, confirmPassword }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        toast.success(data.msg || "Password updated successfully", { toastId: "password-updated" });
+        toast.success(data.msg || "Password updated successfully");
         closeModal();
       } else {
-        toast.error(data.msg || "Failed to update password", { toastId: "password-failed" });
+        toast.error(data.msg || "Failed to update password");
       }
     } catch (error) {
       console.error("Error updating password:", error);
-      toast.error("An error occurred. Please try again.", { toastId: "password-error" });
+      toast.error("An error occurred. Please try again.");
     }
+
+    passwordToastFlag.current = true; // Mark as done, prevent future toasts until reset
   };
 
   const handleProfileUpdate = async () => {
+    if (profileToastFlag.current) return; // Prevent toast from firing multiple times
+
     if (!name || !email) {
-      toast.error("Name and Email cannot be empty!", { toastId: "fields-required" });
+      toast.error("Name and Email cannot be empty!");
+      profileToastFlag.current = true; // Prevent further toasts
       return;
     }
 
@@ -104,14 +110,22 @@ const Profile = () => {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success(data.message || "Profile updated successfully", { toastId: "profile-updated" });
+        toast.success(data.message || "Profile updated successfully" );
       } else {
-        toast.error(data.message || "Failed to update profile", { toastId: "profile-failed" });
+        toast.error(data.message || "Failed to update profile");
       }
     } catch (error) {
       console.error("Error updating profile:", error);
-      toast.error("An error occurred. Please try again.", { toastId: "profile-error" });
+      toast.error("An error occurred. Please try again.");
     }
+
+    profileToastFlag.current = true; // Mark as done, prevent future toasts until reset
+  };
+
+  // Function to reset toast flags in case the user needs to trigger a new toast
+  const resetToastFlags = () => {
+    profileToastFlag.current = false;
+    passwordToastFlag.current = false;
   };
 
   return (
@@ -129,7 +143,7 @@ const Profile = () => {
               id="name"
               value={name}
               name="name"
-              onChange={(e) => setName(e.target.value)} // Enable editing
+              onChange={(e) => setName(e.target.value)} 
             />
           </div>
           <div className="form_control">
@@ -139,7 +153,7 @@ const Profile = () => {
               id="email"
               value={email}
               name="email"
-              onChange={(e) => setEmail(e.target.value)} // Enable editing
+              onChange={(e) => setEmail(e.target.value)} 
             />
           </div>
         </div>
@@ -167,7 +181,6 @@ const Profile = () => {
                 <input
                   type="password"
                   id="OldPassword"
-                  name="password"
                   value={oldPassword}
                   onChange={(e) => setOldPassword(e.target.value)}
                 />
@@ -177,7 +190,6 @@ const Profile = () => {
                 <input
                   type="password"
                   id="NewPassword"
-                  name="password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
@@ -187,7 +199,6 @@ const Profile = () => {
                 <input
                   type="password"
                   id="ConfirmPassword"
-                  name="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
@@ -199,7 +210,8 @@ const Profile = () => {
           </div>
         </div>
       )}
-      <ToastContainer position="right-center" autoClose={2000} />
+
+      <ToastContainer position="top-center" autoClose={2000} closeOnClick />
     </>
   );
 };

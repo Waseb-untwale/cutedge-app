@@ -217,5 +217,20 @@ td i:nth-child(2){
 .Pagination button:active{
   border: 1px solid white;
 }
+.Pagination button:visited {
+  border: 1px solid white;
+}
 
+.NoItemsRow {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: rgb(232, 219, 219);
+  padding: 20px;
+  background-color: transparent;
+}
 
+.NoItemsRow p{
+  font-size: 1.2rem;
+  color:#888181
+}

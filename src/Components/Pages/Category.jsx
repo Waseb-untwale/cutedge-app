@@ -65,9 +65,15 @@ const Category = () => {
     setCurrentPage(1);
   };
 
-  const filteredEntries = blogEntries.filter((entry) =>
-    entry.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  let filteredEntries = blogEntries.filter((entry) => {
+    return (
+      entry.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      (!selectedCategory || entry.category.toLowerCase() === selectedCategory.toLowerCase())
+    );
+  });
+  
+
+ 
 
   const totalPages = Math.ceil(filteredEntries.length / entriesPerPage);
   const startIndex = (currentPage - 1) * entriesPerPage;
@@ -138,44 +144,54 @@ const Category = () => {
           />
         </div>
       </div>
-
+      
       <div className={Styles.Table}>
-        <table>
-          <thead>
-            <tr>
-              <th>S.No</th>
-              <th>Title</th>
-              <th>Category</th>
-              <th>Image</th>
-              <th>Date</th>
-              <th>Pin</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paginatedEntries.map((entry, index) => (
-              <tr key={entry._id}>
-                <td>{startIndex + index + 1}</td>
-                <td>{entry.title}</td>
-                <td>{entry.category}</td>
-                <td>
-                  <img 
-                    src={entry.image} 
-                    alt="Blog Entry" 
-                    className={Styles.Image} 
-                  />
-                </td>
-                <td>{new Date(entry.date).toLocaleDateString()}</td>
-                <td><TiPin size={28} /></td>
-                <td>
-                  <i onClick={() => handleEdit(entry._id)}><FaEdit /></i>
-                  <i onClick={() => handleDelete(entry._id)}><MdDelete /></i>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+  <table>
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Image</th>
+        <th>Date</th>
+        <th>Pin</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {paginatedEntries.length === 0 ? (
+        <tr>
+          <td colSpan="7" className={Styles.NoItemsRow}>
+          Sorry, no blogs found!<br></br>
+          <p>Please check the spelling or try searching for something else</p>
+          </td>
+        </tr>
+      ) : (
+        paginatedEntries.map((entry, index) => (
+          <tr key={entry._id}>
+            <td>{startIndex + index + 1}</td>
+            <td>{entry.title}</td>
+            <td>{entry.category}</td>
+            <td>
+              <img 
+                src={entry.image} 
+                alt="Blog Entry" 
+                className={Styles.Image} 
+              />
+            </td>
+            <td>{new Date(entry.date).toLocaleDateString()}</td>
+            <td><TiPin size={28} /></td>
+            <td>
+              <i onClick={() => handleEdit(entry._id)}><FaEdit /></i>
+              <i onClick={() => handleDelete(entry._id)}><MdDelete /></i>
+            </td>
+          </tr>
+        ))
+      )}
+    </tbody>
+  </table>
+</div>
+
 
       <div className={Styles.Pagination}>
         {Array.from({ length: totalPages }, (_, i) => (

@@ -78,7 +78,7 @@ const Login = () => {
           </div>
         </form>
       </div>
-      <ToastContainer position="top-center" autoClose={2000} />
+      <ToastContainer position="top-center" autoClose={2000} closeOnClick />
     </div>
   );
 };

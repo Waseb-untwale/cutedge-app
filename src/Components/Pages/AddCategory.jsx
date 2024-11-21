@@ -150,7 +150,10 @@ const AddCategory = () => {
                   <td>{index + 1}</td>
                   <td>{category.name}</td>
                   <td>{category.slug}</td>
-                  <td><span className='categoryStatus'>{category.status}</span></td>
+                  <td><span className='categoryStatus' style={{display:"flex",gap:"5px",alignItems:'center',justifyContent:"center"}}>
+                    <span style={{display:'inline-block',height:"7px",width:"7px",borderRadius:
+                    "50%",backgroundColor:"green"
+                  }}></span>{category.status}</span></td>
                   <td>   
                     <i  onClick={() => handleEdit(category)}>
                       <FaEdit />
