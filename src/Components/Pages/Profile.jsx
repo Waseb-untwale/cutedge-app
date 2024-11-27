@@ -19,7 +19,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch("http://localhost:5000/user/getProfile", {
+        const response = await fetch("https://dangal.gocoolcare.com/user/getProfile", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const Profile = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/user/upDatePassword", {
+      const response = await fetch("https://dangal.gocoolcare.com/user/upDatePassword", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -98,7 +98,7 @@ const Profile = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/user/upDateProfile", {
+      const response = await fetch("https://dangal.gocoolcare.com/user/upDateProfile", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

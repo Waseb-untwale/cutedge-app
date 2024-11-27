@@ -30,7 +30,7 @@ const Blog = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/categories');
+        const response = await axios.get('https://dangal.gocoolcare.com/api/categories');
         if (response.data) {
           setCategories(response.data);
         }
@@ -44,7 +44,7 @@ const Blog = () => {
   useEffect(() => {
     const fetchBlogDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/getBlogById/${id}`);
+        const response = await axios.get(`https://dangal.gocoolcare.com/api/getBlogById/${id}`);
         if (response.data) {
           const blog = response.data;
           setTitle(blog.title);
@@ -136,13 +136,13 @@ const Blog = () => {
     try {
       let response;
       if (id) {
-        response = await axios.put(`http://localhost:5000/api/update-blog/${id}`, formData, {
+        response = await axios.put(`https://dangal.gocoolcare.com/api/update-blog/${id}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         });
       } else {
-        response = await axios.post("http://localhost:5000/api/add-blog", formData, {
+        response = await axios.post("https://dangal.gocoolcare.com/api/add-blog", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

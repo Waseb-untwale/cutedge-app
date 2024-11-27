@@ -19,7 +19,7 @@ const Category = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/categories');
+        const response = await axios.get('https://dangal.gocoolcare.com/api/categories');
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -32,7 +32,7 @@ const Category = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        let url = 'http://localhost:5000/api/blogs';
+        let url = 'https://dangal.gocoolcare.com/api/blogs';
         if (selectedCategory) {
           url += `?category=${selectedCategory}`; 
         }
@@ -40,7 +40,7 @@ const Category = () => {
         
         // Fix the image path if necessary
         const updatedBlogs = response.data.map(blog => {
-          blog.image = `http://localhost:5000${blog.image}`; 
+          blog.image = `https://dangal.gocoolcare.com${blog.image}`; 
           return blog;
         });
 
@@ -88,7 +88,7 @@ const Category = () => {
     const confirmDelete = window.confirm('Are you sure you want to delete this blog post?');
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:5000/api/deleteBlog/${id}`);
+        await axios.delete(`https://dangal.gocoolcare.com/api/deleteBlog/${id}`);
         // Remove deleted blog from the list without re-fetching
         setBlogEntries(blogEntries.filter(blog => blog._id !== id));
         alert('Blog post deleted successfully!');
