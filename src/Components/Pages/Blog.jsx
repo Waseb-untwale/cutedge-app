@@ -4,7 +4,7 @@ import '../../../node_modules/react-quill/dist/quill.snow.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom'; 
 import { useNavigate } from 'react-router-dom';
-
+import { APIurl } from '../../utils/common';
 const Blog = () => {
   const [body, setBody] = useState("");  
   const [title, setTitle] = useState(""); 
@@ -27,10 +27,12 @@ const Blog = () => {
   const { id } = useParams(); 
   const navigate = useNavigate();
 
+
+  // call for the category
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('https://dangal.gocoolcare.com/api/categories');
+        const response = await axios.get(APIurl+'/api/categories');
         if (response.data) {
           setCategories(response.data);
         }
@@ -44,7 +46,7 @@ const Blog = () => {
   useEffect(() => {
     const fetchBlogDetails = async () => {
       try {
-        const response = await axios.get(`https://dangal.gocoolcare.com/api/getBlogById/${id}`);
+        const response = await axios.get(APIurl+`/api/getBlogById/${id}`);
         if (response.data) {
           const blog = response.data;
           setTitle(blog.title);
@@ -133,6 +135,7 @@ const Blog = () => {
     formData.append("body", body);
     formData.append("isNewCategory", isNewCategory);
 
+    console.log(...formData)
     try {
       let response;
       if (id) {
@@ -145,7 +148,7 @@ const Blog = () => {
         response = await axios.post("https://dangal.gocoolcare.com/api/add-blog", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-          },
+          }, 
         });
       }
 

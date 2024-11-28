@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./Profile.css";
 import { toast, ToastContainer } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
-
+import { APIurl } from "../../utils/common";
 const Profile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("");
@@ -19,7 +19,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch("https://dangal.gocoolcare.com/user/getProfile", {
+        const response = await fetch(APIurl+"/user/getProfile", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const Profile = () => {
     }
 
     try {
-      const response = await fetch("https://dangal.gocoolcare.com/user/upDatePassword", {
+      const response = await fetch(APIurl+"/user/upDatePassword", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -98,7 +98,7 @@ const Profile = () => {
     }
 
     try {
-      const response = await fetch("https://dangal.gocoolcare.com/user/upDateProfile", {
+      const response = await fetch(APIurl+"/user/upDateProfile", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

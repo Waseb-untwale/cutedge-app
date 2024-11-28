@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './AddCategory.css';
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-
+import { APIurl } from '../../utils/common';
 const AddCategory = () => {
   const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({ name: '', slug: '' });
@@ -16,7 +16,7 @@ const AddCategory = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('https://dangal.gocoolcare.com/api/categories');
+      const response = await fetch(APIurl+'/api/categories');
       if (!response.ok) throw new Error('Failed to fetch categories');
       const data = await response.json();
       setCategories(data);
@@ -47,8 +47,8 @@ const AddCategory = () => {
     try {
       const method = isEditing ? 'PUT' : 'POST';
       const url = isEditing
-        ? `https://dangal.gocoolcare.com/api/categories/${formData._id}`
-        : 'https://dangal.gocoolcare.com/api/categories';
+        ? APIurl+`/api/categories/${formData._id}`
+        : APIurl+'/api/categories';
 
       const response = await fetch(url, {
         method,
@@ -73,7 +73,7 @@ const AddCategory = () => {
   // Handle delete action
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`https://dangal.gocoolcare.com/api/categories/${id}`, {
+      const response = await fetch(APIurl+`/api/categories/${id}`, {
         method: 'DELETE',
       });
       if (response.ok) {
