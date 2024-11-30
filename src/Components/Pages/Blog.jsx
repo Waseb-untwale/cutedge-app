@@ -4,7 +4,29 @@ import '../../../node_modules/react-quill/dist/quill.snow.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
 import { APIurl } from '../../utils/common';
+=======
+
+const Blog = () => {
+  const [body, setBody] = useState("");  
+  const [title, setTitle] = useState(""); 
+  const [slug, setSlug] = useState("");  
+  const [category, setCategory] = useState("");  
+  const [description, setDescription] = useState("");  
+  const [date, setDate] = useState("");  
+  const [isNewCategory, setIsNewCategory] = useState(false);  
+  const [image, setImage] = useState(null);  
+  const [categories, setCategories] = useState([]);  
+  const [newCategory, setNewCategory] = useState("");  
+  const [errors, setErrors] = useState({
+    title: "",
+    slug: "",
+    category: "",
+    description: "",
+    date: "",
+  });
+>>>>>>> 4ffbff4691049e3b04b2433b61d558d7ce205db0
 
 const Blog = () => {
   const [body, setBody] = useState('');
@@ -22,11 +44,18 @@ const Blog = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+<<<<<<< HEAD
   // Fetch categories
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(`${APIurl}/api/categories`);
+=======
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/categories');
+>>>>>>> 4ffbff4691049e3b04b2433b61d558d7ce205db0
         if (response.data) {
           setCategories(response.data);
         }
@@ -41,7 +70,11 @@ const Blog = () => {
   useEffect(() => {
     const fetchBlogDetails = async () => {
       try {
+<<<<<<< HEAD
         const response = await axios.get(`${APIurl}/api/getBlogById/${id}`);
+=======
+        const response = await axios.get(`http://localhost:5000/api/getBlogById/${id}`);
+>>>>>>> 4ffbff4691049e3b04b2433b61d558d7ce205db0
         if (response.data) {
           const blog = response.data;
           setTitle(blog.title);
@@ -136,15 +169,25 @@ const Blog = () => {
     try {
       let response;
       if (id) {
+<<<<<<< HEAD
         response = await axios.put(`${APIurl}/api/update-blog/${id}`, formData, {
+=======
+        response = await axios.put(`https://dangal.gocoolcare.com/api/update-blog/${id}`, formData, {
+>>>>>>> 4ffbff4691049e3b04b2433b61d558d7ce205db0
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
       } else {
+<<<<<<< HEAD
         response = await axios.post(`${APIurl}/api/add-blog`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
+=======
+        response = await axios.post("https://dangal.gocoolcare.com/api/add-blog", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+>>>>>>> 4ffbff4691049e3b04b2433b61d558d7ce205db0
           },
         });
       }

@@ -17,7 +17,7 @@ const Sidebar = () => {
   const fetchUserProfile = async () => {
     try {
       const token = localStorage.getItem("accesstoken"); 
-      const response = await axios.get("http://localhost:5000/user/getProfile", {
+      const response = await axios.get("https://dangal.gocoolcare.com/user/getProfile", {
         headers: {
           Authorization: `Bearer ${token}`, 
         },
@@ -42,7 +42,7 @@ const Sidebar = () => {
 
 
   const logoutUser = async()=>{
-    await axios.get("http://localhost:5000/user/logout")
+    await axios.get("https://dangal.gocoolcare.com/user/logout")
     localStorage.clear();
     navigate('/')
   }
