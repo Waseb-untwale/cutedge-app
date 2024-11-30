@@ -54,7 +54,7 @@ const Blog = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/categories');
+        const response = await axios.get('https://dangal.gocoolcare.com/api/categories');
 >>>>>>> 4ffbff4691049e3b04b2433b61d558d7ce205db0
         if (response.data) {
           setCategories(response.data);
@@ -73,7 +73,7 @@ const Blog = () => {
 <<<<<<< HEAD
         const response = await axios.get(`${APIurl}/api/getBlogById/${id}`);
 =======
-        const response = await axios.get(`http://localhost:5000/api/getBlogById/${id}`);
+        const response = await axios.get(`https://dangal.gocoolcare.com/api/getBlogById/${id}`);
 >>>>>>> 4ffbff4691049e3b04b2433b61d558d7ce205db0
         if (response.data) {
           const blog = response.data;
