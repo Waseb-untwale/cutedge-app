@@ -4,7 +4,7 @@ import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { APIURL } from "../utils/common";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://dangal.gocoolcare.com/user/login", {
+      const response = await fetch(`${APIURL}/user/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

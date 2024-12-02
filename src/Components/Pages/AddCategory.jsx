@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './AddCategory.css';
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { APIURL } from '../../utils/common';
 
 const AddCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -16,7 +17,7 @@ const AddCategory = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/categories');
+      const response = await fetch(`${APIURL}/api/categories`);
       if (!response.ok) throw new Error('Failed to fetch categories');
       const data = await response.json();
       setCategories(data);
@@ -47,8 +48,8 @@ const AddCategory = () => {
     try {
       const method = isEditing ? 'PUT' : 'POST';
       const url = isEditing
-        ? `http://localhost:5000/api/categories/${formData._id}`
-        : 'http://localhost:5000/api/categories';
+        ? `${APIURL}/api/categories/${formData._id}`
+        : `${APIURL}/api/categories`;
 
       const response = await fetch(url, {
         method,
@@ -73,7 +74,7 @@ const AddCategory = () => {
   // Handle delete action
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/categories/${id}`, {
+      const response = await fetch(`${APIURL}/api/categories/${id}`, {
         method: 'DELETE',
       });
       if (response.ok) {
@@ -150,12 +151,30 @@ const AddCategory = () => {
                   <td>{index + 1}</td>
                   <td>{category.name}</td>
                   <td>{category.slug}</td>
-                  <td><span className='categoryStatus' style={{display:"flex",gap:"5px",alignItems:'center',justifyContent:"center"}}>
-                    <span style={{display:'inline-block',height:"7px",width:"7px",borderRadius:
-                    "50%",backgroundColor:"green"
-                  }}></span>{category.status}</span></td>
-                  <td>   
-                    <i  onClick={() => handleEdit(category)}>
+                  <td>
+                    <span
+                      className="categoryStatus"
+                      style={{
+                        display: 'flex',
+                        gap: '5px',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <span
+                        style={{
+                          display: 'inline-block',
+                          height: '7px',
+                          width: '7px',
+                          borderRadius: '50%',
+                          backgroundColor: 'green',
+                        }}
+                      ></span>
+                      {category.status}
+                    </span>
+                  </td>
+                  <td>
+                    <i onClick={() => handleEdit(category)}>
                       <FaEdit />
                     </i>
                     <i
